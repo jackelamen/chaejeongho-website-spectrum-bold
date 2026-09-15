@@ -75,21 +75,6 @@ p:last-child { margin-bottom: 0; }
   padding: 0 24px;
 }
 
-/* ---------- Spectrum thread motif ---------- */
-.spectrum-thread {
-  height: 6px;
-  width: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--c-acceptance),
-    var(--c-change),
-    var(--c-connect),
-    var(--c-strength),
-    var(--c-wisdom),
-    var(--c-soma),
-    var(--c-spirit)
-  );
-}
 
 /* ---------- Header ---------- */
 .site-header {
@@ -211,19 +196,10 @@ p:last-child { margin-bottom: 0; }
   width: 90%;
   height: 180%;
   z-index: 0;
-  background: linear-gradient(
-    100deg,
-    var(--c-acceptance),
-    var(--c-change),
-    var(--c-connect),
-    var(--c-strength),
-    var(--c-wisdom),
-    var(--c-soma),
-    var(--c-spirit)
-  );
-  opacity: 0.22;
+  background: var(--brand-purple);
+  opacity: 0.07;
   transform: rotate(-12deg);
-  filter: blur(55px);
+  filter: blur(70px);
 }
 .hero__grid {
   display: grid;
@@ -415,9 +391,10 @@ section { padding: 56px 0; }
 }
 .module-card {
   background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
-  color: #fff;
+  color: var(--ink);
   box-shadow: var(--shadow);
 }
 .module-card__ko {
@@ -425,28 +402,21 @@ section { padding: 56px 0; }
   font-size: 1.25rem;
   font-weight: 700;
   margin-bottom: 2px;
+  color: var(--ink);
 }
 .module-card__en {
   font-size: 0.8rem;
-  opacity: 0.85;
+  color: var(--brand-purple);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 12px;
+  font-weight: 700;
 }
 .module-card p {
   font-size: 0.92rem;
-  opacity: 0.95;
+  color: var(--ink-soft);
   margin: 0;
 }
-
-.m-acceptance { background: var(--c-acceptance); }
-.m-change { background: var(--c-change); }
-.m-connect { background: var(--c-connect); color: #2b2313; }
-.m-connect .module-card__en { opacity: 0.7; }
-.m-strength { background: var(--c-strength); }
-.m-wisdom { background: var(--c-wisdom); }
-.m-soma { background: var(--c-soma); }
-.m-spirit { background: var(--c-spirit); }
 
 /* ---------- Trait list (S.P.E.C.T.R.U.M.) ---------- */
 .trait-list {

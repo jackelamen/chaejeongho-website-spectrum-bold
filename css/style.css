@@ -418,30 +418,30 @@ p:last-child { margin-bottom: 0; }
   margin-top: 28px;
   flex-wrap: wrap;
 }
+/* Tertiary hero action. Deliberately not a third button: it borrows the
+   underlined-link treatment from .contact-cta__mail so it reads as a
+   different kind of action instead of competing with the two buttons. */
 .hero__press {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  margin-top: 22px;
-  padding: 12px 22px;
-  background: var(--surface);
-  border: 1.5px solid var(--gold);
-  border-radius: 999px;
-  font-size: var(--text-xs);
+  margin-top: 26px;
+  padding-bottom: 5px;
+  font-size: var(--text-sm);
   font-weight: 700;
   color: var(--ink);
-  box-shadow: var(--shadow);
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  border-bottom: 2px solid var(--accent);
+  transition: color 0.2s ease;
 }
-.hero__press svg { width: 17px; height: 17px; flex: none; color: var(--gold); transition: color 0.2s ease; }
-.hero__press:hover {
-  background: var(--gold);
-  color: #fff;
-  text-decoration: none;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+.hero__press svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
 }
-.hero__press:hover svg { color: #fff; }
+.hero__press__arrow { transition: transform 0.2s ease; }
+.hero__press:hover { color: var(--accent); text-decoration: none; }
+.hero__press:hover .hero__press__arrow { transform: translateX(4px); }
 
 /* ---------- Stat row ---------- */
 .stat-row {

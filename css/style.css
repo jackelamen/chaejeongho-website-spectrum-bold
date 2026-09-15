@@ -637,8 +637,10 @@ a.icon-row__item:hover h3 { color: var(--accent); }
   gap: 18px;
 }
 .module-card {
+  --module-color: var(--accent);
   background: var(--surface);
   border: 1px solid var(--border);
+  border-top: 3px solid var(--module-color);
   border-radius: var(--radius);
   padding: 24px;
   color: var(--ink);
@@ -648,8 +650,16 @@ a.icon-row__item:hover h3 { color: var(--accent); }
 .module-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
-  border-color: var(--accent);
+  border-color: var(--module-color);
+  border-top-color: var(--module-color);
 }
+.module-card--acceptance { --module-color: var(--c-acceptance); }
+.module-card--change     { --module-color: var(--c-change); }
+.module-card--connect    { --module-color: var(--c-connect); }
+.module-card--strength   { --module-color: var(--c-strength); }
+.module-card--wisdom     { --module-color: var(--c-wisdom); }
+.module-card--soma       { --module-color: var(--c-soma); }
+.module-card--spirit     { --module-color: var(--c-spirit); }
 .module-card__ko {
   font-family: var(--font-head);
   font-size: var(--text-md);
@@ -659,7 +669,7 @@ a.icon-row__item:hover h3 { color: var(--accent); }
 }
 .module-card__en {
   font-size: var(--text-2xs);
-  color: var(--accent);
+  color: var(--module-color);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 12px;

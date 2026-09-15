@@ -625,6 +625,13 @@ a.info-card:hover h3 { color: var(--accent); }
   font-size: var(--text-sm);
   color: var(--ink);
 }
+.bio-intro p:first-child {
+  font-family: var(--font-head);
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--ink);
+}
 
 /* Sentences pulled verbatim from the surrounding paragraph, echoed larger
    to give a 4,000+ character narrative some visual relief at intervals. */
@@ -638,6 +645,107 @@ a.info-card:hover h3 { color: var(--accent); }
   line-height: 1.5;
   color: var(--ink);
   text-wrap: pretty;
+}
+
+/* ---------- Story chapters (bio narrative, numbered like a life's-work
+   timeline instead of a flat stack of identical headings) ---------- */
+.story-chapter {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 28px;
+  margin-bottom: var(--space-xl);
+}
+.story-chapter:last-child { margin-bottom: 0; }
+.story-chapter__num {
+  font-family: var(--font-head);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.story-chapter__content h2 { margin-bottom: 14px; }
+.story-chapter__content p { color: var(--ink-soft); margin-bottom: 14px; }
+.story-chapter__content p:last-child { margin-bottom: 0; }
+.story-chapter .pull-quote { margin: var(--space-md) 0; }
+@media (max-width: 640px) {
+  .story-chapter {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .story-chapter__num { font-size: 1.5rem; }
+}
+
+/* ---------- Book grid (bibliography, with a placeholder cover slot for
+   artwork to be added later) ---------- */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+}
+@media (max-width: 900px) {
+  .book-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 640px) {
+  .book-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.book-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.book-card__cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, var(--surface-alt), var(--surface-tint));
+  border-bottom: 1px solid var(--border);
+  color: var(--ink-faint);
+}
+.book-card__cover svg { width: 28px; height: 28px; }
+.book-card__tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+.book-card__body { padding: 14px 16px 16px; }
+.book-card__body h3 {
+  font-family: var(--font-head);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 6px;
+  line-height: 1.4;
+}
+.book-card__body p {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0;
+}
+.book-note {
+  margin-top: var(--space-sm);
+  font-size: var(--text-2xs);
+  color: var(--ink-faint);
 }
 
 /* ---------- Module cards (SPECTRUM) ---------- */

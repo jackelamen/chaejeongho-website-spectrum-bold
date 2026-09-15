@@ -686,15 +686,13 @@ a.info-card:hover h3 { color: var(--accent); }
 .bio-block h2 { margin-bottom: 14px; }
 .bio-block p { color: var(--ink-soft); }
 
+/* Quiet intro prose, one shade darker than the ink-soft narrative below
+   it — enough to mark it as the opening without bolding a whole
+   paragraph (the actual thesis sentence is already the hero's pull-quote,
+   so re-emphasizing it here would just repeat that beat). */
 .bio-intro p {
   font-size: var(--text-sm);
-  color: var(--ink);
-}
-.bio-intro p:first-child {
-  font-family: var(--font-head);
-  font-size: var(--text-md);
-  font-weight: 600;
-  line-height: 1.6;
+  line-height: 1.75;
   color: var(--ink);
 }
 

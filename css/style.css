@@ -423,8 +423,17 @@ section { padding: 56px 0; }
 /* ---------- Icon row (home initiatives / vision-style feature list) ---------- */
 .icon-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 30px 28px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px 24px;
+}
+@media (max-width: 900px) {
+  .icon-row { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .icon-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .icon-row { grid-template-columns: 1fr; }
 }
 .icon-row__item {
   display: flex;

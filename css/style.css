@@ -399,8 +399,11 @@ section { padding: 56px 0; }
 /* ---------- Grouped credentials (bio) ---------- */
 .credential-groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px 48px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px 64px;
+}
+@media (max-width: 640px) {
+  .credential-groups { grid-template-columns: 1fr; }
 }
 .credential-group h3 {
   font-family: var(--font-body);

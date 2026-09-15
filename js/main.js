@@ -118,4 +118,45 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   }
+
+  // Contact form: submit via fetch so a successful send shows an inline
+  // message instead of navigating away to Formspree's own page.
+  var contactForm = document.querySelector(".contact-form");
+  if (contactForm) {
+    var status = contactForm.querySelector(".contact-form__status");
+    var submitBtn = contactForm.querySelector('button[type="submit"]');
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (status) {
+        status.textContent = "";
+        status.removeAttribute("data-state");
+      }
+      if (submitBtn) submitBtn.disabled = true;
+      fetch(contactForm.action, {
+        method: "POST",
+        body: new FormData(contactForm),
+        headers: { Accept: "application/json" },
+      })
+        .then(function (res) {
+          if (res.ok) {
+            contactForm.reset();
+            if (status) {
+              status.textContent = "문의가 접수되었습니다. 빠른 시일 내에 답변드리겠습니다.";
+              status.setAttribute("data-state", "ok");
+            }
+          } else {
+            throw new Error("submit failed");
+          }
+        })
+        .catch(function () {
+          if (status) {
+            status.textContent = "전송에 실패했습니다. contact@chaejeongho.com으로 직접 메일 부탁드립니다.";
+            status.setAttribute("data-state", "error");
+          }
+        })
+        .finally(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  }
 });

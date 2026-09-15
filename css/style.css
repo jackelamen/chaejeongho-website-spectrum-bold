@@ -796,6 +796,39 @@ a.info-card:hover h3 { color: var(--accent); }
   color: var(--ink-faint);
 }
 
+/* ---------- Book hero (a single title's page: cover beside the copy) ---------- */
+.book-hero__grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 56px;
+  align-items: center;
+}
+.book-hero__cover {
+  justify-self: center;
+  max-width: 290px;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(20, 22, 30, 0.24);
+  opacity: 0;
+  animation: scaleIn 0.8s ease 0.2s forwards;
+}
+.book-hero__cover img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 760px) {
+  .book-hero__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .book-hero__cover {
+    order: -1;
+    max-width: 210px;
+  }
+}
+
 /* ---------- Module cards (SPECTRUM) ---------- */
 .module-grid {
   display: grid;

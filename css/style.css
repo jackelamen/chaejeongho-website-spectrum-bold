@@ -40,6 +40,40 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* ---------- Motion ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -154,22 +188,38 @@ p:last-child { margin-bottom: 0; }
 }
 
 .main-nav a {
+  position: relative;
   color: var(--ink-soft);
   font-size: 0.92rem;
   font-weight: 500;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
+}
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 3px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 .main-nav a:hover {
-  background: var(--surface-alt);
   text-decoration: none;
   color: var(--ink);
+  background: var(--surface-alt);
 }
+.main-nav a:hover::after { transform: scaleX(1); }
 .main-nav a.is-active {
   color: var(--accent);
   font-weight: 700;
 }
+.main-nav a.is-active::after { transform: scaleX(1); }
 
 @media (max-width: 860px) {
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
@@ -204,9 +254,34 @@ p:last-child { margin-bottom: 0; }
   height: 180%;
   z-index: 0;
   background: var(--accent);
-  opacity: 0.07;
+  opacity: 0;
   transform: rotate(-12deg);
   filter: blur(70px);
+  animation: heroWash 1.8s ease-out 0.1s forwards;
+}
+@keyframes heroWash {
+  from { opacity: 0; }
+  to { opacity: 0.08; }
+}
+
+/* Orchestrated hero entrance: each element arrives in sequence, not all at once */
+.hero__eyebrow,
+.hero__name,
+.hero__claim,
+.hero__lede,
+.hero__actions {
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards;
+}
+.hero__eyebrow { animation-delay: 0.05s; }
+.hero__name { animation-delay: 0.15s; }
+.hero__claim { animation-delay: 0.25s; }
+.hero__lede { animation-delay: 0.4s; }
+.hero__actions { animation-delay: 0.5s; }
+
+.hero__portrait {
+  opacity: 0;
+  animation: scaleIn 0.8s ease 0.2s forwards;
 }
 .hero__grid {
   display: grid;
@@ -226,6 +301,10 @@ p:last-child { margin-bottom: 0; }
   width: 100%;
   height: auto;
   display: block;
+  transition: transform 0.6s ease;
+}
+.hero__portrait:hover img {
+  transform: scale(1.035);
 }
 .hero__portrait-tag {
   position: absolute;
@@ -334,19 +413,20 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.95rem;
   border: 1px solid transparent;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
-.btn:hover { text-decoration: none; }
+.btn:hover { text-decoration: none; transform: translateY(-2px); }
 .btn--primary {
   background: var(--ink);
   color: #fff;
 }
-.btn--primary:hover { background: #1c2833; }
+.btn--primary:hover { background: #1c2833; box-shadow: var(--shadow-hover); }
 .btn--outline {
   background: transparent;
   border-color: var(--border);
   color: var(--ink);
 }
-.btn--outline:hover { background: var(--surface-alt); }
+.btn--outline:hover { background: var(--surface-alt); box-shadow: var(--shadow); }
 
 .btn--soon {
   background: var(--surface-alt);
@@ -450,19 +530,22 @@ section { padding: 56px 0; }
   margin: -20px -18px;
   border-radius: var(--radius-sm);
   color: var(--ink);
-  transition: background 0.15s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 a.icon-row__item:hover {
   background: var(--surface);
   text-decoration: none;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
 }
 .icon-row__icon {
   width: 40px;
   height: 40px;
   color: var(--accent);
+  transition: transform 0.25s ease;
 }
 .icon-row__icon svg { width: 100%; height: 100%; }
+a.icon-row__item:hover .icon-row__icon { transform: scale(1.12) rotate(-4deg); }
 .icon-row__item h3 {
   font-family: var(--font-body);
   font-size: 1.12rem;
@@ -501,6 +584,12 @@ a.icon-row__item:hover h3 { color: var(--accent); }
   padding: 24px;
   color: var(--ink);
   box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.module-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
 }
 .module-card__ko {
   font-family: var(--font-head);
@@ -556,32 +645,53 @@ a.icon-row__item:hover h3 { color: var(--accent); }
   margin: 0;
 }
 
-/* ---------- Quote block: a moment, not a callout box ---------- */
+/* ---------- Quote block: the site's one deliberate color moment ---------- */
 .quote-block {
   position: relative;
-  padding: 8px 0 0;
+  overflow: hidden;
+  background: var(--ink);
+  border-radius: var(--radius);
+  padding: 52px 44px;
   margin: 48px 0;
-  border-top: 2px solid var(--ink);
-  max-width: 860px;
+}
+.quote-block::before {
+  content: "\201C";
+  position: absolute;
+  top: 4px;
+  left: 24px;
+  font-family: var(--font-head);
+  font-size: 7rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.45;
+  line-height: 1;
+  pointer-events: none;
 }
 .quote-block p {
+  position: relative;
   font-family: var(--font-head);
-  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.4rem, 2.4vw, 1.95rem);
   font-weight: 700;
   line-height: 1.6;
-  color: var(--ink);
-  margin: 24px 0 0;
+  color: #fff;
+  margin: 0;
+  max-width: 780px;
   text-wrap: pretty;
 }
 .quote-block cite {
+  position: relative;
   display: block;
-  margin-top: 20px;
+  margin-top: 22px;
   font-family: var(--font-body);
   font-style: normal;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--ink-faint);
+  color: rgba(255,255,255,0.55);
+}
+@media (max-width: 640px) {
+  .quote-block { padding: 40px 26px; }
+  .quote-block::before { font-size: 6rem; left: 16px; }
 }
 
 /* ---------- Contact ---------- */

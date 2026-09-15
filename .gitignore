@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+
+# Editor
+.vscode/
+
+# Source working files (not site assets)
+*.ai
+*.docx
+/dr ho *.jpg
+
+# Claude Code local session files
+.claude/settings.local.json

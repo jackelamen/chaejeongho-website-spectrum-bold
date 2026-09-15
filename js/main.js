@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var revealSelectors = [
     ".section-head", ".stat-row", ".credential-list", ".credential-groups",
     ".quote-block", ".icon-row__item", ".module-card", ".trait-item",
-    ".feature-list li", ".bio-block", ".teaser-hero__lede", ".diagram-figure",
+    ".feature-list li", ".bio-block", ".pull-quote",
+    ".teaser-hero__tagline", ".teaser-hero__body", ".diagram-figure",
     ".contact-cta__inner"
   ];
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(revealSelectors.join(",")));

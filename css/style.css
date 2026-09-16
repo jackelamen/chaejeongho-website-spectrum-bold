@@ -443,6 +443,65 @@ p:last-child { margin-bottom: 0; }
 .hero__press:hover { color: var(--accent); text-decoration: none; }
 .hero__press:hover .hero__press__arrow { transform: translateX(4px); }
 
+/* ---------- Photo hero (homepage): full-bleed portrait with a dark
+   scrim standing in for the atmosphere wash, text overlaid on top
+   instead of sitting beside a separate portrait card. ---------- */
+.hero--photo {
+  position: relative;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  padding: var(--space-2xl) 0;
+  overflow: hidden;
+}
+.hero__photo-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__photo-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 32%;
+  display: block;
+}
+.hero__photo-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(18, 20, 18, 0.93) 0%, rgba(18, 20, 18, 0.8) 30%, rgba(18, 20, 18, 0.42) 56%, rgba(18, 20, 18, 0.08) 80%);
+}
+.hero__photo-content {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+.hero__photo-content .hero__eyebrow { color: var(--gold-bright); }
+.hero__photo-content .hero__claim {
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+}
+.hero__photo-content .hero__lede { color: rgba(255, 255, 255, 0.85); }
+.hero__photo-content .btn--primary { background: var(--gold-bright); color: var(--ink); }
+.hero__photo-content .btn--primary:hover { background: #fff; }
+.hero__photo-content .btn--outline {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.hero__photo-content .btn--outline:hover { background: rgba(255, 255, 255, 0.14); border-color: #fff; }
+.hero__photo-content .hero__press { color: #fff; border-bottom-color: var(--gold-bright); }
+.hero__photo-content .hero__press svg { color: var(--gold-bright); }
+.hero__photo-content .hero__press:hover { color: var(--gold-bright); }
+@media (max-width: 760px) {
+  .hero--photo { min-height: 560px; }
+  .hero__photo-bg img { object-position: 68% 22%; }
+  .hero__photo-bg::after {
+    background: linear-gradient(190deg, rgba(18, 20, 18, 0.55) 0%, rgba(18, 20, 18, 0.88) 52%, rgba(18, 20, 18, 0.95) 100%);
+  }
+}
+
 /* ---------- Stat row ---------- */
 .stat-row {
   display: grid;

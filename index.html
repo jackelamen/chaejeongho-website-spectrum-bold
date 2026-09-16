@@ -65,6 +65,27 @@
     </div>
   </section>
 
+  <section class="waitlist-banner">
+    <div class="container waitlist-banner__inner">
+      <div class="waitlist-banner__copy">
+        <div class="section-head__eyebrow">개원 예정</div>
+        <h2>채정호 정신건강의학과 개원 소식을 가장 먼저 받아보세요</h2>
+        <p>개원 일정과 예약 안내를 이메일로 가장 먼저 전해드립니다.</p>
+      </div>
+      <form class="waitlist-form" action="https://formspree.io/f/YOUR_WAITLIST_FORM_ID" method="POST">
+        <input type="text" name="_gotcha" class="contact-form__hp" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="채정호 정신건강의학과 개원 알림 신청">
+        <div class="waitlist-form__row">
+          <input type="text" name="name" placeholder="성함" aria-label="성함" required>
+          <input type="email" name="email" placeholder="이메일" aria-label="이메일" required>
+          <input type="tel" name="phone" placeholder="연락처 (선택)" aria-label="연락처 (선택)">
+          <button type="submit" class="btn btn--primary">알림 신청하기</button>
+        </div>
+        <p class="contact-form__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
   <section class="section-alt">
     <div class="container">
       <div class="section-head">

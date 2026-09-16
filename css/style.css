@@ -1302,6 +1302,62 @@ a.media-card:hover .media-card__title { color: var(--accent); }
   .quote-block::before { font-size: 6rem; left: 16px; }
 }
 
+/* ---------- Waitlist banner (home): opening-notification lead capture ---------- */
+.waitlist-banner {
+  background: var(--accent);
+  padding: var(--space-lg) 0;
+}
+.waitlist-banner__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.waitlist-banner__copy { max-width: 480px; }
+.waitlist-banner__copy .section-head__eyebrow { color: var(--gold-bright); margin-bottom: 8px; }
+.waitlist-banner__copy h2 { color: #fff; margin: 0 0 8px; }
+.waitlist-banner__copy p { color: rgba(255, 255, 255, 0.85); margin: 0; }
+.waitlist-form { flex: 1 1 420px; max-width: 560px; }
+.waitlist-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.waitlist-form__row input {
+  flex: 1 1 140px;
+  min-width: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+.waitlist-form__row input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4);
+}
+.waitlist-form__row .btn {
+  flex: 0 0 auto;
+  border: none;
+  cursor: pointer;
+  background: var(--gold-bright);
+  color: var(--ink);
+}
+.waitlist-form__row .btn:hover { background: #fff; }
+.waitlist-form .contact-form__status { color: rgba(255, 255, 255, 0.9); }
+.waitlist-form .contact-form__status[data-state="ok"] { color: var(--gold-bright); }
+.waitlist-form .contact-form__status[data-state="error"] { color: #ffb4b0; }
+@media (max-width: 700px) {
+  .waitlist-banner__inner { flex-direction: column; align-items: stretch; }
+  .waitlist-form { max-width: none; }
+  .waitlist-form__row { flex-direction: column; }
+  .waitlist-form__row input,
+  .waitlist-form__row .btn { width: 100%; }
+}
+
 /* ---------- Contact ---------- */
 .contact-cta {
   background: var(--surface);

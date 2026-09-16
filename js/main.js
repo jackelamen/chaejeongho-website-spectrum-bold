@@ -148,29 +148,30 @@ document.addEventListener("DOMContentLoaded", function () {
     updateHeroParallax();
   }
 
-  // Contact form: submit via fetch so a successful send shows an inline
-  // message instead of navigating away to Formspree's own page.
-  var contactForm = document.querySelector(".contact-form");
-  if (contactForm) {
-    var status = contactForm.querySelector(".contact-form__status");
-    var submitBtn = contactForm.querySelector('button[type="submit"]');
-    contactForm.addEventListener("submit", function (e) {
+  // Ajax form submit: shared by every Formspree-backed form on the site, so
+  // a successful send shows an inline message instead of navigating away to
+  // Formspree's own page.
+  function bindAjaxForm(form, successMsg, errorMsg) {
+    if (!form) return;
+    var status = form.querySelector('[role="status"]');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (status) {
         status.textContent = "";
         status.removeAttribute("data-state");
       }
       if (submitBtn) submitBtn.disabled = true;
-      fetch(contactForm.action, {
+      fetch(form.action, {
         method: "POST",
-        body: new FormData(contactForm),
+        body: new FormData(form),
         headers: { Accept: "application/json" },
       })
         .then(function (res) {
           if (res.ok) {
-            contactForm.reset();
+            form.reset();
             if (status) {
-              status.textContent = "문의가 접수되었습니다. 빠른 시일 내에 답변드리겠습니다.";
+              status.textContent = successMsg;
               status.setAttribute("data-state", "ok");
             }
           } else {
@@ -179,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(function () {
           if (status) {
-            status.textContent = "전송에 실패했습니다. contact@chaejeongho.com으로 직접 메일 부탁드립니다.";
+            status.textContent = errorMsg;
             status.setAttribute("data-state", "error");
           }
         })
@@ -188,6 +189,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
   }
+
+  bindAjaxForm(
+    document.querySelector(".contact-form"),
+    "문의가 접수되었습니다. 빠른 시일 내에 답변드리겠습니다.",
+    "전송에 실패했습니다. contact@chaejeongho.com으로 직접 메일 부탁드립니다."
+  );
+  bindAjaxForm(
+    document.querySelector(".waitlist-form"),
+    "신청이 접수되었습니다. 개원 소식을 가장 먼저 알려드리겠습니다.",
+    "전송에 실패했습니다. 잠시 후 다시 시도해 주세요."
+  );
 
   // Book carousel: arrows scroll the native horizontal track (smooth
   // scroll + scroll-snap does the easing), and disable themselves at

@@ -766,6 +766,101 @@ a.info-card:hover h3 { color: var(--accent); }
   margin-top: 4px;
 }
 
+/* ---------- Media appearances (home) ---------- */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+@media (max-width: 700px) {
+  .media-grid { grid-template-columns: 1fr; }
+}
+.media-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+a.media-card:hover {
+  text-decoration: none;
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+.media-card__thumb {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--surface-alt);
+  overflow: hidden;
+}
+.media-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.media-card__thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.35) 100%);
+}
+.media-card__play {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.media-card__play svg {
+  width: 52px;
+  height: 52px;
+  color: #fff;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  transition: transform 0.2s ease;
+}
+a.media-card:hover .media-card__play svg { transform: scale(1.08); }
+.media-card__thumb--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-tint);
+}
+.media-card__thumb--icon svg {
+  width: 44px;
+  height: 44px;
+  color: var(--accent);
+}
+.media-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 20px 22px;
+}
+.media-card__meta {
+  font-size: var(--text-2xs);
+  color: var(--gold);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.media-card__title {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+a.media-card:hover .media-card__title { color: var(--accent); }
+
 /* ---------- Narrative bio blocks ---------- */
 .bio-block { margin-bottom: var(--space-lg); }
 .bio-block:last-child { margin-bottom: 0; }

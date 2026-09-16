@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ".quote-block", ".icon-row__item", ".module-card", ".trait-item",
     ".feature-list li", ".bio-block", ".pull-quote",
     ".teaser-hero__tagline", ".teaser-hero__body", ".diagram-figure",
-    ".contact-cta__inner"
+    ".contact-cta__inner", ".media-card"
   ];
   var revealEls = Array.prototype.slice.call(document.querySelectorAll(revealSelectors.join(",")));
 
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     revealEls.forEach(function (el) { el.classList.add("reveal"); });
 
     // Stagger items within a shared row/grid so they cascade rather than pop together.
-    ["icon-row", "module-grid", "trait-list", "credential-list", "feature-list"].forEach(function (cls) {
+    ["icon-row", "module-grid", "trait-list", "credential-list", "feature-list", "media-grid"].forEach(function (cls) {
       document.querySelectorAll("." + cls).forEach(function (group) {
         Array.prototype.forEach.call(group.children, function (child, i) {
           child.style.transitionDelay = Math.min(i * 70, 420) + "ms";

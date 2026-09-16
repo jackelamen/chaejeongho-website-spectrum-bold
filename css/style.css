@@ -1355,7 +1355,7 @@ a.media-card:hover .media-card__title { color: var(--accent); }
   .waitlist-form { max-width: none; }
   .waitlist-form__row { flex-direction: column; }
   .waitlist-form__row input,
-  .waitlist-form__row .btn { width: 100%; }
+  .waitlist-form__row .btn { flex: none; width: 100%; }
 }
 
 /* ---------- Contact ---------- */

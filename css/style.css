@@ -445,13 +445,18 @@ p:last-child { margin-bottom: 0; }
 
 /* ---------- Photo hero (homepage): full-bleed portrait with a dark
    scrim standing in for the atmosphere wash, text overlaid on top
-   instead of sitting beside a separate portrait card. ---------- */
+   instead of sitting beside a separate portrait card.
+   aspect-ratio (rather than a fixed min-height) keeps the crop window
+   close to the source photo's own proportions at any viewport width,
+   so object-fit:cover doesn't have to cut away most of the image to
+   fill an ultra-wide, short box. */
 .hero--photo {
   position: relative;
-  min-height: 640px;
+  aspect-ratio: 16 / 9;
+  min-height: 480px;
+  max-height: 760px;
   display: flex;
   align-items: center;
-  padding: var(--space-2xl) 0;
   overflow: hidden;
 }
 .hero__photo-bg {
@@ -463,26 +468,29 @@ p:last-child { margin-bottom: 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 32%;
+  object-position: 62% 42%;
   display: block;
 }
 .hero__photo-bg::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(100deg, rgba(18, 20, 18, 0.93) 0%, rgba(18, 20, 18, 0.8) 30%, rgba(18, 20, 18, 0.42) 56%, rgba(18, 20, 18, 0.08) 80%);
+  background: linear-gradient(100deg, rgba(18, 20, 18, 0.86) 0%, rgba(18, 20, 18, 0.68) 32%, rgba(18, 20, 18, 0.3) 58%, rgba(18, 20, 18, 0.04) 82%);
 }
 .hero__photo-content {
   position: relative;
   z-index: 1;
-  max-width: 620px;
+  max-width: 660px;
 }
 .hero__photo-content .hero__eyebrow { color: var(--gold-bright); }
 .hero__photo-content .hero__claim {
   color: #fff;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
 }
-.hero__photo-content .hero__lede { color: rgba(255, 255, 255, 0.85); }
+.hero__photo-content .hero__lede {
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+}
 .hero__photo-content .btn--primary { background: var(--gold-bright); color: var(--ink); }
 .hero__photo-content .btn--primary:hover { background: #fff; }
 .hero__photo-content .btn--outline {
@@ -495,8 +503,8 @@ p:last-child { margin-bottom: 0; }
 .hero__photo-content .hero__press svg { color: var(--gold-bright); }
 .hero__photo-content .hero__press:hover { color: var(--gold-bright); }
 @media (max-width: 760px) {
-  .hero--photo { min-height: 560px; }
-  .hero__photo-bg img { object-position: 68% 22%; }
+  .hero--photo { aspect-ratio: auto; min-height: 620px; max-height: none; padding: var(--space-2xl) 0; }
+  .hero__photo-bg img { object-position: 66% 30%; }
   .hero__photo-bg::after {
     background: linear-gradient(190deg, rgba(18, 20, 18, 0.55) 0%, rgba(18, 20, 18, 0.88) 52%, rgba(18, 20, 18, 0.95) 100%);
   }

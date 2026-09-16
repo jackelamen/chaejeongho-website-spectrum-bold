@@ -686,10 +686,10 @@ a.info-card:hover h3 { color: var(--accent); }
 .bio-block h2 { margin-bottom: 14px; }
 .bio-block p { color: var(--ink-soft); }
 
-/* Quiet intro prose, one shade darker than the ink-soft narrative below
-   it — enough to mark it as the opening without bolding a whole
-   paragraph (the actual thesis sentence is already the hero's pull-quote,
-   so re-emphasizing it here would just repeat that beat). */
+/* Quiet intro prose, one shade darker than the ink-soft narrative below it:
+   enough to mark it as the opening without bolding a whole paragraph
+   (the actual thesis sentence is already the hero's pull-quote, so
+   re-emphasizing it here would just repeat that beat). */
 .bio-intro p {
   font-size: var(--text-sm);
   line-height: 1.75;
@@ -1000,12 +1000,21 @@ a.info-card:hover h3 { color: var(--accent); }
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+/* Only the homepage carries the full inquiry form; every other page keeps
+   the plain mailto CTA above, so this grid is scoped to that one section. */
+.contact-cta__inner--form {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 56px;
 }
 @media (max-width: 800px) {
-  .contact-cta__inner { grid-template-columns: 1fr; gap: 32px; }
+  .contact-cta__inner--form { grid-template-columns: 1fr; gap: 32px; }
 }
 .contact-cta__intro { align-self: start; }
 .contact-cta h2 { margin: 0 0 10px; }

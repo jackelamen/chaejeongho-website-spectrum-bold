@@ -818,6 +818,149 @@ a.info-card:hover h3 { color: var(--accent); }
   color: var(--ink-faint);
 }
 
+/* ---------- Book carousel (homepage) ---------- */
+.book-carousel {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.book-carousel__viewport { flex: 1; overflow: hidden; }
+.book-carousel__track {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 6px 4px 30px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.book-carousel__track::-webkit-scrollbar { display: none; }
+.book-carousel__item {
+  flex: 0 0 auto;
+  width: 190px;
+  scroll-snap-align: start;
+}
+/* A flat cover image reads as a generic rounded-rectangle card unless
+   something suggests it has physical pages. A near-square left edge
+   (the spine) against a slightly rounded right edge (the page block),
+   a faux page-stack strip, and a shadow cast to one side (as if
+   leaning on a shelf) do that without needing 3D artwork. */
+.book-cover-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  border-radius: 1px 4px 4px 1px;
+  overflow: hidden;
+  background: var(--surface-alt);
+  box-shadow:
+    1px 0 0 rgba(0, 0, 0, 0.06) inset,
+    3px 4px 10px rgba(20, 22, 30, 0.16),
+    7px 8px 18px rgba(20, 22, 30, 0.1);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.book-cover-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Page-edge strip: fine alternating lines along the right edge, like the
+   fore-edge of a closed book seen face-on. */
+.book-cover-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 5px;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.55) 0px,
+      rgba(255, 255, 255, 0.55) 1px,
+      rgba(30, 26, 20, 0.12) 1px,
+      rgba(30, 26, 20, 0.12) 2px
+    );
+  box-shadow: inset 2px 0 3px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+.book-cover-card:hover,
+.book-cover-card:focus-visible {
+  box-shadow:
+    1px 0 0 rgba(0, 0, 0, 0.06) inset,
+    5px 8px 16px rgba(20, 22, 30, 0.22),
+    11px 14px 26px rgba(20, 22, 30, 0.14);
+  transform: translateY(-3px);
+}
+.book-cover-card:hover img,
+.book-cover-card:focus-visible img {
+  transform: scale(1.07);
+}
+.book-cover-card__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 16px;
+  background: linear-gradient(to top, rgba(20, 22, 30, 0.94) 0%, rgba(20, 22, 30, 0.6) 48%, rgba(20, 22, 30, 0) 78%);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.book-cover-card:hover .book-cover-card__overlay,
+.book-cover-card:focus-visible .book-cover-card__overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+.book-cover-card__title {
+  font-family: var(--font-head);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.book-cover-card__desc {
+  font-size: 0.7rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+.book-carousel__nav {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+.book-carousel__nav svg { width: 18px; height: 18px; }
+.book-carousel__nav:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+  transform: scale(1.06);
+}
+.book-carousel__nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  transform: none;
+}
+@media (max-width: 640px) {
+  .book-carousel__nav { display: none; }
+  .book-carousel__item { width: 148px; }
+}
+
 /* ---------- Book hero (a single title's page: cover beside the copy) ---------- */
 .book-hero__grid {
   display: grid;

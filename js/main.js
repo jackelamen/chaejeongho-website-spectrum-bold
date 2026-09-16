@@ -159,4 +159,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
   }
+
+  // Book carousel: arrows scroll the native horizontal track (smooth
+  // scroll + scroll-snap does the easing), and disable themselves at
+  // either end instead of scrolling past the last card.
+  var carousel = document.querySelector(".book-carousel");
+  if (carousel) {
+    var track = carousel.querySelector(".book-carousel__track");
+    var prevBtn = carousel.querySelector(".book-carousel__nav--prev");
+    var nextBtn = carousel.querySelector(".book-carousel__nav--next");
+    var firstItem = track.querySelector(".book-carousel__item");
+
+    function stepDistance() {
+      if (!firstItem) return track.clientWidth;
+      var style = window.getComputedStyle(track);
+      var gap = parseFloat(style.columnGap || style.gap || "0") || 0;
+      return (firstItem.getBoundingClientRect().width + gap) * 2;
+    }
+
+    function updateNavState() {
+      var max = track.scrollWidth - track.clientWidth - 1;
+      if (prevBtn) prevBtn.disabled = track.scrollLeft <= 0;
+      if (nextBtn) nextBtn.disabled = track.scrollLeft >= max;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        track.scrollBy({ left: -stepDistance(), behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        track.scrollBy({ left: stepDistance(), behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    }
+    track.addEventListener("scroll", updateNavState, { passive: true });
+    window.addEventListener("resize", updateNavState);
+    updateNavState();
+  }
 });

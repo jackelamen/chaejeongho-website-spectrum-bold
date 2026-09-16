@@ -119,6 +119,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Hero photo: subtle parallax as the page scrolls. The image is sized
+  // taller than its frame (see .hero__photo-bg img in style.css), so
+  // nudging it reveals more of the real photo rather than blank space.
+  var heroImg = document.querySelector(".hero__photo-bg img");
+  if (heroImg && !reduceMotion) {
+    var heroFrame = heroImg.closest(".hero--photo");
+    var heroRange = 36;
+    var heroTicking = false;
+
+    function updateHeroParallax() {
+      heroTicking = false;
+      var rect = heroFrame.getBoundingClientRect();
+      var elementCenter = rect.top + rect.height / 2;
+      var viewportCenter = window.innerHeight / 2;
+      var progress = (viewportCenter - elementCenter) / viewportCenter;
+      var offset = Math.max(-1, Math.min(1, progress)) * heroRange;
+      heroImg.style.transform = "translateY(calc(-50% + " + offset.toFixed(1) + "px))";
+    }
+
+    window.addEventListener("scroll", function () {
+      if (!heroTicking) {
+        heroTicking = true;
+        requestAnimationFrame(updateHeroParallax);
+      }
+    }, { passive: true });
+    window.addEventListener("resize", updateHeroParallax);
+    updateHeroParallax();
+  }
+
   // Contact form: submit via fetch so a successful send shows an inline
   // message instead of navigating away to Formspree's own page.
   var contactForm = document.querySelector(".contact-form");

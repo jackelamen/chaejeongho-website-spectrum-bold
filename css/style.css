@@ -452,12 +452,21 @@ p:last-child { margin-bottom: 0; }
    fill an ultra-wide, short box. */
 .hero--photo {
   position: relative;
+  width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 480px;
   max-height: 760px;
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+/* A flex item's auto width shrinks to fit its content instead of
+   filling the line the way a normal block box does, which left
+   .container's max-width + margin:auto centering the text in the
+   middle of the whole photo instead of lining it up with the header
+   logo's left edge. Force it back to block-box sizing behavior. */
+.hero--photo > .container {
+  width: 100%;
 }
 .hero__photo-bg {
   position: absolute;

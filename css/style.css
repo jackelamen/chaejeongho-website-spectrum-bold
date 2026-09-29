@@ -774,9 +774,10 @@ a.activity-feature:hover h3 { color: var(--accent); }
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
 }
-a.activity-feature:hover .activity-feature__media img { transform: scale(1.05); }
+/* Tighter framing for photos with more background than subject; scaling
+   the image (not the container) keeps the card's own size unchanged. */
+.activity-feature__media--crop img { transform: scale(1.12); }
 @media (max-width: 800px) {
   .activity-feature,
   .activity-feature--reverse { flex-direction: column; min-height: 0; }

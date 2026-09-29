@@ -760,11 +760,16 @@ a.activity-feature:hover h3 { color: var(--accent); }
 }
 .activity-feature__cta { margin-top: 6px; border: none; }
 .activity-feature__media {
+  position: relative;
   flex: 1 1 55%;
-  display: block;
   min-height: 260px;
 }
+/* Absolutely positioned so the image's own aspect ratio (a tall book
+   cover vs. a wide event photo) can't drive the flex row's height —
+   every card stays the same height regardless of the photo's shape. */
 .activity-feature__media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;

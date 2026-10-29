@@ -193,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   bindAjaxForm(
     document.querySelector(".contact-form"),
     "문의가 접수되었습니다. 빠른 시일 내에 답변드리겠습니다.",
-    "전송에 실패했습니다. contact@chaejeongho.com으로 직접 메일 부탁드립니다."
+    "전송에 실패했습니다. contact@spectrumclinic.co.kr로 직접 메일 부탁드립니다."
   );
   bindAjaxForm(
     document.querySelector(".waitlist-form"),

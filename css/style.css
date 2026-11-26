@@ -253,7 +253,7 @@ p:last-child { margin-bottom: 0; }
 }
 .main-nav a.is-active::after { transform: scaleX(1); }
 
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
   .main-nav {
     display: none;

@@ -201,6 +201,68 @@ document.addEventListener("DOMContentLoaded", function () {
     "전송에 실패했습니다. 잠시 후 다시 시도해 주세요."
   );
 
+  // New book popup (homepage). Opens once per visit; "오늘 하루 보지 않기"
+  // hides it until midnight. Storage can be blocked (private windows), so
+  // every read and write is guarded and the popup still works without it.
+  var popup = document.getElementById("book-popup");
+  if (popup) {
+    var HIDE_UNTIL = "bookPopupHideUntil";
+    var SEEN = "bookPopupSeen";
+    var lastFocus = null;
+
+    function store(kind, key, value) {
+      try {
+        var s = window[kind];
+        if (value === undefined) return s.getItem(key);
+        s.setItem(key, value);
+      } catch (e) { return null; }
+    }
+
+    function closePopup() {
+      popup.hidden = true;
+      document.body.classList.remove("has-popup");
+      document.removeEventListener("keydown", onKey);
+      store("sessionStorage", SEEN, "1");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    function onKey(e) {
+      if (e.key === "Escape") { closePopup(); return; }
+      if (e.key !== "Tab") return;
+      var f = popup.querySelectorAll("a[href], button");
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    function openPopup() {
+      lastFocus = document.activeElement;
+      popup.hidden = false;
+      document.body.classList.add("has-popup");
+      document.addEventListener("keydown", onKey);
+      var closeBtn = popup.querySelector(".book-popup__close");
+      if (closeBtn) closeBtn.focus();
+    }
+
+    popup.querySelectorAll("[data-popup-close]").forEach(function (el) {
+      el.addEventListener("click", closePopup);
+    });
+    var todayBtn = popup.querySelector("[data-popup-today]");
+    if (todayBtn) {
+      todayBtn.addEventListener("click", function () {
+        var midnight = new Date();
+        midnight.setHours(24, 0, 0, 0);
+        store("localStorage", HIDE_UNTIL, String(midnight.getTime()));
+        closePopup();
+      });
+    }
+
+    var hideUntil = parseInt(store("localStorage", HIDE_UNTIL), 10) || 0;
+    if (Date.now() >= hideUntil && !store("sessionStorage", SEEN)) {
+      setTimeout(openPopup, 700);
+    }
+  }
+
   // Book carousel: arrows scroll the native horizontal track (smooth
   // scroll + scroll-snap does the easing), and disable themselves at
   // either end instead of scrolling past the last card.

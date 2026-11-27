@@ -253,7 +253,7 @@ p:last-child { margin-bottom: 0; }
 }
 .main-nav a.is-active::after { transform: scaleX(1); }
 
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
   .main-nav {
     display: none;
@@ -1698,3 +1698,121 @@ a.media-card:hover .media-card__title { color: var(--accent); }
   color: var(--ink-soft);
 }
 .toc-list li { padding: 4px 0; }
+
+/* Book page: linked cards, the 신간 tag, and covers shown whole */
+a.book-card { color: inherit; }
+a.book-card:hover { text-decoration: none; }
+a.book-card:hover h3 { color: var(--accent); }
+.book-card__cover img { object-fit: contain; }
+.book-card__tag--new {
+  z-index: 1;
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.books-all-link { text-align: right; margin: 20px 0 0; }
+
+/* ---------- New book popup (homepage) ---------- */
+.book-popup[hidden] { display: none; }
+.book-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.book-popup__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 20, 18, 0.55);
+  animation: popupFade 0.25s ease;
+}
+.book-popup__panel {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(18, 20, 18, 0.35);
+  animation: popupRise 0.3s ease;
+}
+.book-popup__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.book-popup__close:hover { background: var(--surface-alt); color: var(--ink); }
+.book-popup__close svg { width: 20px; height: 20px; }
+.book-popup__body {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 36px 32px 28px;
+}
+.book-popup__cover {
+  display: block;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 12px 26px rgba(20, 22, 30, 0.22);
+}
+.book-popup__cover img { display: block; width: 100%; height: auto; }
+.book-popup__title {
+  font-size: var(--text-lg);
+  margin: 0 0 6px;
+}
+.book-popup__desc {
+  color: var(--ink-soft);
+  font-size: var(--text-xs);
+  line-height: 1.7;
+  margin: 0 0 20px;
+}
+.book-popup__footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  background: var(--surface-alt);
+}
+.book-popup__dismiss {
+  flex: 1;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.book-popup__dismiss + .book-popup__dismiss { border-left: 1px solid var(--border); }
+.book-popup__dismiss:hover { color: var(--ink); background: var(--surface-tint); }
+body.has-popup { overflow: hidden; }
+@keyframes popupFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popupRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .book-popup__backdrop, .book-popup__panel { animation: none; }
+}
+@media (max-width: 560px) {
+  .book-popup__body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 32px 22px 22px;
+    text-align: center;
+  }
+  .book-popup__cover { width: 130px; justify-self: center; }
+  .book-popup__desc { text-align: left; }
+}

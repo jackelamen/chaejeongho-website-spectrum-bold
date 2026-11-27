@@ -31,6 +31,7 @@
       <a href="optimist-school.html">긍정학교</a>
       <a href="optimist-club.html">옵티미스트 클럽</a>
       <a href="spiritfulness.html">영성챙김</a>
+      <a href="books.html">저서소개</a>
     </nav>
   </div>
 </header>
@@ -322,6 +323,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
+      <p class="books-all-link"><a href="books.html" class="new-book__more">저서소개 전체 보기 →</a></p>
     </div>
   </section>
 
@@ -440,6 +442,7 @@
         <a href="optimist-school.html">긍정학교</a>
         <a href="optimist-club.html">옵티미스트 클럽</a>
         <a href="spiritfulness.html">영성챙김</a>
+        <a href="books.html">저서소개</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -447,6 +450,33 @@
     </div>
   </div>
 </footer>
+
+<!-- New book popup (homepage only). Delete this block to turn it off. -->
+<div class="book-popup" id="book-popup" role="dialog" aria-modal="true" aria-labelledby="book-popup-title" hidden>
+  <div class="book-popup__backdrop" data-popup-close></div>
+  <div class="book-popup__panel">
+    <button type="button" class="book-popup__close" data-popup-close aria-label="닫기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="book-popup__body">
+      <a class="book-popup__cover" href="spectrum-book.html">
+        <img src="images/book-spectrum.jpg" alt="『스펙트럼 정신심리치료』 표지" width="400" height="544">
+      </a>
+      <div>
+        <div class="new-book__eyebrow">신간 · 2026년 11월</div>
+        <h2 id="book-popup-title" class="book-popup__title">스펙트럼 정신심리치료</h2>
+        <p class="new-book__meta">채정호 · 정영은 · 허휴정 지음 | 학지사</p>
+        <p class="book-popup__desc">이 책은 인간의 고통을 단순한 증상이 아닌 실존의 조건으로 바라보며, 수용․변화․연결․강점․지혜․몸․영성이라는 7가지 치료적 요소를 환자의 삶과 맥락에 맞춰 유기적이고 순차적으로 적용하는 모듈형 통합 프레임을 제시한다.</p>
+        <a href="spectrum-book.html" class="btn btn--primary">책 소개 자세히 보기</a>
+      </div>
+    </div>
+    <div class="book-popup__footer">
+      <button type="button" class="book-popup__dismiss" data-popup-today>오늘 하루 보지 않기</button>
+      <button type="button" class="book-popup__dismiss" data-popup-close>닫기</button>
+    </div>
+  </div>
+</div>
+<!-- end new book popup -->
 
 <script src="js/main.js"></script>
 </body>

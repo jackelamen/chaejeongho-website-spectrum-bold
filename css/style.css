@@ -1816,3 +1816,61 @@ body.has-popup { overflow: hidden; }
   .book-popup__cover { width: 130px; justify-self: center; }
   .book-popup__desc { text-align: left; }
 }
+
+/* ---------- New book promo (스펙트럼 치료 hero) ---------- */
+.hero-book-promo {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 36px;
+  padding: 14px 22px 14px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  text-align: left;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-book-promo:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+.hero-book-promo img {
+  width: 62px;
+  height: auto;
+  border-radius: 2px;
+  box-shadow: 0 6px 14px rgba(20, 22, 30, 0.2);
+  flex: none;
+}
+.hero-book-promo__text { display: flex; flex-direction: column; gap: 3px; }
+.hero-book-promo__eyebrow {
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+}
+.hero-book-promo__title { font-weight: 700; font-size: 1.05rem; }
+.hero-book-promo__meta { font-size: var(--text-2xs); color: var(--ink-soft); }
+.hero-book-promo__more {
+  margin-left: 10px;
+  padding-left: 18px;
+  border-left: 1px solid var(--border);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .hero-book-promo { flex-wrap: wrap; gap: 14px; padding: 14px; }
+  .hero-book-promo__text { flex: 1; min-width: 0; }
+  .hero-book-promo__more {
+    flex-basis: 100%;
+    margin-left: 0;
+    padding: 10px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+}

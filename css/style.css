@@ -521,12 +521,34 @@ p:last-child { margin-bottom: 0; }
 .hero__photo-content .hero__press { color: #fff; border-bottom-color: var(--gold-bright); }
 .hero__photo-content .hero__press svg { color: var(--gold-bright); }
 .hero__photo-content .hero__press:hover { color: var(--gold-bright); }
+/* Phones: a tall, narrow hero left only a sliver of the wide photo behind
+   the text. Stack instead: the whole photo on top at its own 1800x1187
+   shape (parallax off, nothing cropped), the text below on the same dark
+   ground the scrim fades into. */
 @media (max-width: 760px) {
-  .hero--photo { aspect-ratio: auto; min-height: 620px; max-height: none; padding: var(--space-2xl) 0; }
-  .hero__photo-bg img { object-position: 66% 30%; }
-  .hero__photo-bg::after {
-    background: linear-gradient(190deg, rgba(18, 20, 18, 0.55) 0%, rgba(18, 20, 18, 0.88) 52%, rgba(18, 20, 18, 0.95) 100%);
+  .hero--photo {
+    flex-direction: column;
+    align-items: stretch;
+    aspect-ratio: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 0;
+    background: rgb(18, 20, 18);
   }
+  .hero__photo-bg {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 1800 / 1187;
+  }
+  .hero__photo-bg img {
+    height: 100%;
+    object-position: 50% 50%;
+    transform: translateY(-50%) !important;
+  }
+  .hero__photo-bg::after {
+    background: linear-gradient(180deg, rgba(18, 20, 18, 0) 55%, rgba(18, 20, 18, 0.9) 100%);
+  }
+  .hero--photo > .container { padding-top: var(--space-md); padding-bottom: var(--space-xl); }
 }
 
 /* ---------- Stat row ---------- */
@@ -778,10 +800,14 @@ a.activity-feature:hover h3 { color: var(--accent); }
 /* Tighter framing for photos with more background than subject; scaling
    the image (not the container) keeps the card's own size unchanged. */
 .activity-feature__media--crop img { transform: scale(1.12); }
-@media (max-width: 800px) {
+/* Stacked: the photo frame takes the photos' own 3:2 shape and drops the
+   zoom, so the whole photo shows instead of a trimmed strip. Stacks below
+   960px because the side-by-side frame turns nearly square under that. */
+@media (max-width: 960px) {
   .activity-feature,
   .activity-feature--reverse { flex-direction: column; min-height: 0; }
-  .activity-feature__media { order: -1; min-height: 220px; }
+  .activity-feature__media { order: -1; min-height: 0; flex: none; aspect-ratio: 3 / 2; }
+  .activity-feature__media--crop img { transform: none; }
   .activity-feature__content { padding: 28px 26px; }
 }
 
